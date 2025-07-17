@@ -14,7 +14,7 @@ Le tout sans aucun framework — juste le plaisir du code brut !
 
 ```bash
 # 1. Clone le projet
-git clone <repo-url> animaux-virtuels && cd animaux-virtuels
+git clone https://github.com/lorycarvajol/pet_app.git animaux-virtuels && cd animaux-virtuels
 
 # 2. Lance le serveur (Node ≥ 18)
 node server.js
