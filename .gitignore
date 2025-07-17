@@ -1,0 +1,28 @@
+# Node dependencies
+
+node\_modules/
+
+# Fichier de données persistant (animaux sauvegardés)
+
+data.json
+
+# Journaux
+
+npm-debug.log\*
+yarn-debug.log\*
+yarn-error.log\*
+\*.log
+
+# Variables d'environnement (si tu en ajoutes)
+
+.env\*
+
+# Dossiers d'IDE/éditeur
+
+.vscode/
+.idea/
+
+# Fichiers systèmes
+
+.DS\_Store
+Thumbs.db
