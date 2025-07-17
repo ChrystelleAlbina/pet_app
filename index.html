@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Animaux Virtuels</title>
+    <style>
+        /* — styles identiques (raccourcis ici pour aller à l’essentiel) — */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4299e1;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .animal-card {
+            display: inline-block;
+            width: 200px;
+            padding: 15px;
+            margin: 10px;
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            text-align: center;
+        }
+
+        .stat-bar {
+            background: #e2e8f0;
+            height: 20px;
+            border-radius: 10px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width .3s;
+        }
+
+        .energy {
+            background: #48bb78;
+        }
+
+        .happiness {
+            background: #ed8936;
+        }
+
+        .health {
+            background: #e53e3e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🐾 Animaux Virtuels</h1>
+
+        <div class="controls">
+            <input type="text" id="animalName" placeholder="Nom" value="Fluffy">
+            <select id="animalType">
+                <option value="chat">Chat 🐱</option>
+                <option value="chien">Chien 🐶</option>
+                <option value="lapin">Lapin 🐰</option>
+                <option value="hamster">Hamster 🐹</option>
+                <option value="oiseau">Oiseau 🐦</option>
+                <option value="tortue">Tortue 🐢</option>
+                <option value="poisson">Poisson 🐠</option>
+                <option value="souris">Souris 🐭</option>
+            </select>
+            <button onclick="creerAnimal()">Créer un Animal</button>
+            <button onclick="supprimerTous()">Supprimer Tous</button>
+        </div>
+
+        <div id="animalsContainer"></div>
+    </div>
+
+    <script>
+        /* ---------- Classe et données ---------- */
+        class Animal {
+            constructor(nom, type, emoji) {
+                this.nom = nom; this.type = type; this.emoji = emoji;
+                this.energie = 100; this.bonheur = 100; this.sante = 100; this.age = 0;
+            }
+            manger() { this.energie = Math.min(100, this.energie + 20); this.bonheur = Math.min(100, this.bonheur + 10); }
+            jouer() { this.energie = Math.max(0, this.energie - 15); this.bonheur = Math.min(100, this.bonheur + 25); }
+            dormir() { this.energie = Math.min(100, this.energie + 30); this.sante = Math.min(100, this.sante + 10); }
+            vieillir() { this.age++; this.sante = Math.max(0, this.sante - 5); }
+        }
+        const animalEmojis = { chat: '🐱', chien: '🐶', lapin: '🐰', hamster: '🐹', oiseau: '🐦', tortue: '🐢', poisson: '🐠', souris: '🐭' };
+        let animaux = [];
+
+        /* ---------- UI ---------- */
+        function afficherAnimaux() {
+            const c = document.getElementById("animalsContainer"); c.innerHTML = "";
+            animaux.forEach((a, i) => c.insertAdjacentHTML("beforeend", `
+    <div class="animal-card">
+      <div style="font-size:3em">${a.emoji}</div><h3>${a.nom}</h3>
+      <p>${a.type} • ${a.age} an(s)</p>
+      <div><small>Énergie ${a.energie}%</small><div class="stat-bar"><div class="stat-fill energy" style="width:${a.energie}%"></div></div></div>
+      <div><small>Bonheur ${a.bonheur}%</small><div class="stat-bar"><div class="stat-fill happiness" style="width:${a.bonheur}%"></div></div></div>
+      <div><small>Santé ${a.sante}%</small><div class="stat-bar"><div class="stat-fill health" style="width:${a.sante}%"></div></div></div>
+      <div class="controls">
+        <button onclick="actionAnimal(${i},'manger')">🍎</button>
+        <button onclick="actionAnimal(${i},'jouer')">🎮</button>
+        <button onclick="actionAnimal(${i},'dormir')">😴</button>
+        <button onclick="actionAnimal(${i},'vieillir')">⏰</button>
+      </div>
+      <button onclick="supprimerAnimal(${i})" style="background:#e53e3e;margin-top:6px;">❌ Supprimer</button>
+    </div>`));
+            if (!animaux.length) c.textContent = "Aucun animal.";
+        }
+
+        /* ---------- Création ---------- */
+        function creerAnimal() {
+            const nom = document.getElementById("animalName").value.trim();
+            if (!nom) return alert("Entrez un nom !");
+            const type = document.getElementById("animalType").value;
+            const a = new Animal(nom, type, animalEmojis[type]);
+            animaux.push(a); document.getElementById("animalName").value = "";
+            afficherAnimaux();
+
+            /* ----- ENVOI AU FICHIER JSON via le serveur Node ----- */
+            fetch("/animals", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(a) })
+                .catch(() => alert("⚠️ Impossible d'écrire dans data.json"));
+        }
+
+        /* ---------- Autres interactions ---------- */
+        function actionAnimal(i, act) { animaux[i][act](); afficherAnimaux(); }
+        const supprimerAnimal = i => { animaux.splice(i, 1); afficherAnimaux(); };
+        const supprimerTous = () => { if (animaux.length) { animaux = []; afficherAnimaux(); } };
+
+        /* ---------- Récupération des animaux déjà stockés ---------- */
+        window.onload = () => fetch("/animals").then(r => r.json())
+            .then(list => {
+                animaux = list.map(o => Object.assign(new Animal(o.nom, o.type, o.emoji), o));
+                afficherAnimaux();
+            }).catch(() => afficherAnimaux());
+    </script>
+</body>
+
+</html>
