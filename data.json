@@ -16,5 +16,14 @@
     "bonheur": 100,
     "sante": 100,
     "age": 0
+  },
+  {
+    "nom": "bloup",
+    "type": "poisson",
+    "emoji": "🐠",
+    "energie": 100,
+    "bonheur": 100,
+    "sante": 100,
+    "age": 0
   }
 ]
