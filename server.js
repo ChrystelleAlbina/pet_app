@@ -23,6 +23,7 @@ function writeAnimals(list) {
 }
 
 // Création du serveur
+
 http.createServer((req, res) => {
   // POST /animals → ajout d’un animal
   if (req.method === "POST" && req.url === "/animals") {
