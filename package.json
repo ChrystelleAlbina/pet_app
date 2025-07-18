@@ -1,0 +1,21 @@
+{
+  "name": "pet_app",
+  "version": "1.0.0",
+  "description": "Bienvenue dans Animaux Virtuels, un petit bac à sable JavaScript + Node qui t’apprend ES6, DOM, et persistance sur fichier JSON.",
+  "homepage": "https://github.com/lorycarvajol/pet_app#readme",
+  "bugs": {
+    "url": "https://github.com/lorycarvajol/pet_app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorycarvajol/pet_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

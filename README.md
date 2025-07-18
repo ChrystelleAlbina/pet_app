@@ -1,78 +1,108 @@
-# 🐾 Animaux Virtuels — Le mini‑Tamagotchi du Web
+# 🐾 Animaux Virtuels
 
-Bienvenue dans **Animaux Virtuels**, un petit bac à sable JavaScript + Node qui t’apprend :
+**Le mini‑Tamagotchi 100 % fait maison !**
 
-* les classes ES6 (👩‍🎓)
-* la manipulation du DOM (🎨)
-* la persistance simple avec un fichier **`data.json`** piloté par un mini‑serveur Node (💾)
+Bienvenue dans *Animaux Virtuels*, un petit bac à sable JavaScript + Node qui t’apprend :
 
-Le tout sans aucun framework — juste le plaisir du code brut !
+- 📚 **Classes ES6**  
+- 🎨 **Manipulation du DOM**  
+- 💾 **Persistance “fichier JSON”** sans base de données  
 
 ---
 
-## 🚀 Installation express
+## 📦 Installation
 
-```bash
-# 1. Clone le projet
-git clone https://github.com/lorycarvajol/pet_app.git pet_app && cd pet_app
+1. **Clone le dépôt**  
+   ```bash
+   git clone https://github.com/lorycarvajol/pet_app.git
+   cd pet_app
+````
 
-# 2. Lance le serveur (Node ≥ 18)
-node server.js
+2. **Installe (aucune dépendance externe)**
 
-# 3. Ouvre ton navigateur :
-→ http://localhost:3000
+   ```bash
+   npm install
+   ```
+3. **Démarre le serveur**
+
+   ```bash
+   npm start
+   ```
+4. **Ouvre** ton navigateur sur
+   👉 `http://localhost:3000`
+
+> Au premier démarrage, `data.json` sera créé automatiquement (vide) !
+
+---
+
+## 🎮 Usage
+
+1. **Crée** un animal
+
+   * Renseigne un nom, choisis une espèce
+   * Clique sur **Créer**
+2. **Interagis**
+
+   * 🍎 Manger
+   * 🎮 Jouer
+   * 😴 Dormir
+   * ⏰ Vieillir
+3. **Observe**
+
+   * Les jauges d’Énergie, Bonheur et Santé évoluent
+   * Le fichier `data.json` se met à jour en temps réel
+4. **Supprime**
+
+   * Un seul animal : bouton ❌
+   * Tous les animaux : bouton **Tout supprimer**
+
+---
+
+## 📂 Structure du projet
+
+```
+pet_app/
+├── index.html     ← l’UI
+├── style.css      ← les styles
+├── script.js      ← la logique front‑end
+├── server.js      ← l’API Node.js (sans Express)
+├── data.json      ← stockage persistant (tableau JSON)
+├── package.json   ← config & scripts
+└── README.md      ← ce guide ludique
 ```
 
-💡 Le serveur crée automatiquement **`data.json`** à la racine s’il n’existe pas.
+---
+
+## 🔧 Détails techniques
+
+* **Front** : HTML + CSS + JS vanilla
+* **Back**  : Node.js natif (`http`, `fs`)
+* **Persistance** :
+
+  * `POST /animals` → ajoute
+  * `GET /animals`  → liste
+  * `DELETE /animals`        → vide tout
+  * `DELETE /animals/:index` → supprime un seul
 
 ---
 
-## 👾 Gameplay éclair
+## 🛠️ Personnalisation
 
-1. **Choisis** un nom et une espèce puis clique sur **Créer un Animal**.
-2. Joue aux soignants : 🍎 *“Manger”*, 🎮 *“Jouer”*, 😴 *“Dormir”*, ⏰ *“Vieillir”*.
-3. Regarde les jauges d’Énergie, Bonheur et Santé osciller.
-4. Rafraîchis la page → tes créatures sont de retour ! (Persistées dans `data.json`.)
-
-> Tu veux un grand ménage ? Clique simplement sur **Supprimer Tous**.
+* Ajoute d’autres **actions** (méthodes sur `Animal`)
+* Crée un **fichier CSS** ou un thème sombre
+* Intègre le **LocalStorage** ou un **mini‑framework**
+* Déploie sur **Heroku** ou **Vercel**
 
 ---
 
-## ⚙️ Détails techniques
+## 📝 Licence
 
-| Côté navigateur                               | Côté Node                                            |
-| --------------------------------------------- | ---------------------------------------------------- |
-| **`index.html`** 100 % vanilla JS             | **`server.js`** < 100 lignes, pas d’Express          |
-| Classe **`Animal`** pour encapsuler les stats | Module **HTTP** natif + `fs` pour écrire `data.json` |
-| `fetch('/animals', 'POST')` pour sauvegarder  | Route `POST /animals` : append dans le fichier       |
-| Chargement initial via `GET /animals`         | Route `GET /animals` : renvoie le JSON               |
+Projet sous licence **MIT** — amuse‑toi bien et customise à l’infini ! ⭐
 
 ---
 
-## 🛠 Personnalise le bac à sable
-
-* **Nouvelles actions ?** Ajoute des méthodes à la classe `Animal` & des boutons dans le DOM.
-* **Style** ? Modifie le CSS inline ou déplace‑le dans un fichier `.css` dédié.
-* **Vite + Hot Reload ?** Remplace le serveur basique par Vite ou Express si le cœur t’en dit.
-
----
-
-## 🔍 Dépannage rapide
-
-| Problème                  | Solution éclair                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------------------- |
-| `node: command not found` | Installe [Node.js](https://nodejs.org) ≥ 18.                                                |
-| Port 3000 déjà utilisé    | Lignes 12‑14 de `server.js` → change le numéro de port.                                     |
-| Animaux non sauvegardés   | Vérifie que le POST **n’est pas** bloqué par un ad‑blocker ou la politique CORS d’un proxy. |
-| JSON corrompu             | Supprime (ou répare) `data.json`, il sera régénéré.                                         |
-
----
-
-## 📜 Licence
-
-Projet publié sous licence **MIT** — fais‑en bon usage, améliore‑le, et n’oublie pas de partager tes nouveautés !
-
----
+```
+```
 
 ### 🙏 Crédits & Petits biscuits
 

@@ -1,0 +1,81 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+  min-height: 100vh;
+  color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.container {
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, select, button {
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 2px solid #e2e8f0;
+}
+
+button {
+  cursor: pointer;
+  background: #4299e1;
+  color: #fff;
+  border: none;
+}
+
+button:hover {
+  background: #3182ce;
+}
+
+button.danger {
+  background: #e53e3e;
+}
+
+button.danger:hover {
+  background: #c53030;
+}
+
+.animal-card {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  padding: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  text-align: center;
+}
+
+.stat-bar {
+  background: #e2e8f0;
+  height: 14px;
+  border-radius: 7px;
+  margin: 4px 0;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 7px;
+  transition: width .3s;
+}
+
+.stat-fill.energy     { background: #48bb78; }
+.stat-fill.happiness  { background: #ed8936; }
+.stat-fill.health     { background: #e53e3e; }
