@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "nom": "quenottes",
+    "type": "hamster",
+    "emoji": "🐹",
+    "energie": 100,
+    "bonheur": 100,
+    "sante": 100,
+    "age": 0
+  },
+  {
+    "nom": "pinpin",
+    "type": "lapin",
+    "emoji": "🐰",
+    "energie": 100,
+    "bonheur": 100,
+    "sante": 100,
+    "age": 0
+  }
+]

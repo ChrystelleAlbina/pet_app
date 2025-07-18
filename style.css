@@ -1,81 +1,172 @@
-* { box-sizing: border-box; }
-
+/* ================= GLOBAL ================= */
+* { box-sizing: border-box; margin:0; padding:0; }
 body {
-  font-family: Arial, sans-serif;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 20px;
-  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  background: radial-gradient(circle at top left, #a8e6cf, #dcedc1);
   color: #333;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
+/* ================ CONTAINER =============== */
 .container {
-  background: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  width: 90%; max-width: 1000px;
+  margin: 30px auto;
+  background: #fefae0;
+  border: 4px solid #2a75bb;          /* bleu Pokémon */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 20px;
 }
 
+/* ================== TITRE ================== */
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  color: #2a75bb;
+  text-shadow: 2px 2px #ffcb05;       /* ombre jaune */
+  margin-bottom: 20px;
+}
+
+/* ================ CONTRÔLES ================ */
 .controls {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
+  background: #fff3e0;
+  border: 3px solid #ff6f61;          /* rouge pastel */
+  border-radius: 8px;
+  padding: 12px;
 }
 
-input, select, button {
-  padding: 10px 14px;
-  font-size: 15px;
+.controls input,
+.controls select {
+  flex: 1 1 150px;
+  border: 3px solid #2a75bb;
+  background: #ffffff;
   border-radius: 6px;
-  border: 2px solid #e2e8f0;
+  font-size: 0.9em;
+  padding: 8px;
 }
 
-button {
+.controls button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8em;
+  border: 3px solid #2a75bb;
+  color: #2a75bb;
+  background: #ffcb05;                 /* jaune Pokémon */
+  padding: 10px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  background: #4299e1;
-  color: #fff;
-  border: none;
+  transition: transform .1s, background .2s;
 }
 
-button:hover {
-  background: #3182ce;
+.controls button:hover {
+  background: #fff;
+  transform: scale(1.05);
 }
 
-button.danger {
-  background: #e53e3e;
+.controls .danger {
+  border-color: #e53e3e;
+  color: #e53e3e;
+  background: #fed7d7;
+}
+.controls .danger:hover {
+  background: #fff3f2;
 }
 
-button.danger:hover {
-  background: #c53030;
+/* =============== ANIMAL CARDS ============== */
+#animalsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .animal-card {
-  display: inline-block;
-  width: 200px;
-  margin: 10px;
-  padding: 15px;
-  border: 2px solid #e2e8f0;
+  background: #ffffffcc;               /* un peu transparent */
+  border: 4px solid #2a75bb;
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  width: 200px;
   text-align: center;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform .2s, box-shadow .2s;
 }
 
+.animal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.animal-card h3 {
+  font-family: 'Press Start 2P', cursive;
+  margin: 8px 0;
+  color: #2a75bb;
+}
+
+/* ================= STAT BARS ================= */
 .stat-bar {
   background: #e2e8f0;
-  height: 14px;
-  border-radius: 7px;
-  margin: 4px 0;
+  border: 2px solid #2a75bb;
+  border-radius: 8px;
+  height: 16px;
   overflow: hidden;
+  margin: 6px 0;
 }
 
 .stat-fill {
   height: 100%;
-  border-radius: 7px;
-  transition: width .3s;
+  transition: width .4s ease;
 }
 
-.stat-fill.energy     { background: #48bb78; }
-.stat-fill.happiness  { background: #ed8936; }
-.stat-fill.health     { background: #e53e3e; }
+.stat-fill.energy {
+  background: linear-gradient(90deg, #48bb78, #38a169);
+}
+.stat-fill.happiness {
+  background: linear-gradient(90deg, #ed8936, #dd6b20);
+}
+.stat-fill.health {
+  background: linear-gradient(90deg, #e53e3e, #c53030);
+}
+
+/* =============== ACTION BUTTONS ============== */
+.animal-card .controls {
+  margin-top: 8px;
+}
+
+.animal-card .controls button {
+  border: 2px solid #2a75bb;
+  background: #ffcb05;
+  padding: 6px;
+  margin: 2px;
+  font-size: 0.9em;
+}
+
+.animal-card .controls button:hover {
+  transform: scale(1.1);
+}
+
+/* ================ DELETE BTN =============== */
+.animal-card > button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7em;
+  margin-top: 8px;
+  padding: 6px;
+  border: 2px solid #e53e3e;
+  background: #fed7d7;
+  color: #e53e3e;
+  border-radius: 6px;
+  transition: background .2s, transform .1s;
+}
+
+.animal-card > button:hover {
+  background: #fff3f2;
+  transform: scale(1.05);
+}
+
+/* ============== RESPONSIVE =============== */
+@media (max-width: 600px) {
+  .controls { flex-direction: column; }
+  .animal-card { width: 100%; max-width: 300px; }
+}
